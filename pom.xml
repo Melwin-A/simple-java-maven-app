@@ -68,6 +68,6 @@
         </executions>
       </plugin>
     </plugins>
+    <finalName>hello</finalName>
   </build>
-  <finalName>hello</finalName>
 </project>
