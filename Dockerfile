@@ -14,13 +14,13 @@ COPY src ./src
 RUN mvn clean install
 
 # Use a lightweight base image for the application
-FROM adoptopenjdk/openjdk17:jdk-17.0.0_35-alpine-slim AS final
+FROM  openjdk:11-jre-slim  AS final
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy the built JAR file from the build stage
-COPY --from=build /target/hello.jar .
+COPY --from=build app/target/hello.jar .
 
 # Set the command to run the application
 CMD ["java", "-jar", "hello.jar"]
