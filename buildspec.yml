@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "637423483538.dkr.ecr..amazonaws.com/sampleapp"
+    REPOSITORY_URI: "637423483538.dkr.ecr.us-east-1.amazonaws.com/sampleapp"
     IMAGE_TAG: latest
     AWS_DEFAULT_REGION: us-east-1
 phases:
