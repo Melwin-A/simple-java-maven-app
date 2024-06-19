@@ -1,0 +1,12 @@
+version: 0.0
+Resources:
+  - myLambdaFunction:
+      Type: AWS::Lambda::Function
+      Properties:
+        Name: myfunction
+        Alias: live
+Hooks:
+  ApplicationStart:
+    - location: invoke_lambda.sh
+      timeout: 300
+      runas: root
