@@ -1,20 +1,17 @@
----
 version: 0.2
+
 env:
   variables:
-    REPOSITORY_URI: 074806522502.dkr.ecr.us-east-1.amazonaws.com/sampleapp-registory
+    REPOSITORY_URI: "074806522502.dkr.ecr.us-east-1.amazonaws.com/sampleapp-registory"
     IMAGE_TAG: latest
     AWS_DEFAULT_REGION: us-east-1
-    DEPLOYMENT_STRATEGY: add
 phases:
   pre_build:
     commands:
       - echo create Amazon ECR regirstry
-      - aws ecr create-repository --repository-name sampleapp-registory --region
-        $AWS_DEFAULT_REGION
+      - aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
       - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login
-        --username AWS --password-stdin $REPOSITORY_URI
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
   build:
     commands:
       - echo Build started on `date`
@@ -25,28 +22,3 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image to ECR...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - |
-        case $DEPLOYMENT_STRATEGY in
-          add)
-            echo "Executing Add deployment playbook"
-            ;;
-          rollback)
-            echo "Executing Rollback deployment playbook"
-            ;;
-          start)
-            echo "Executing Start deployment playbook"
-            ;;
-          gracefulrestart)
-            echo "Executing Graceful Restart deployment playbook"
-            ;;
-          restart)
-            echo "Executing Restart deployment playbook"
-            ;;
-          stop)
-            echo "Executing Stop deployment playbook"
-            ;;
-          *)
-            echo "Unknown deployment strategy: $DEPLOYMENT_STRATEGY"
-            exit 1
-            ;;
-        esac
