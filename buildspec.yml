@@ -5,6 +5,7 @@ env:
     REPOSITORY_URI: "074806522502.dkr.ecr.us-east-1.amazonaws.com/sampleapp-registory"
     IMAGE_TAG: latest
     AWS_DEFAULT_REGION: us-east-1
+	DEPLOYMENT_STRATEGY: "add"
 phases:
   pre_build:
     commands:
@@ -22,3 +23,28 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image to ECR...
       - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - |
+        case $DEPLOYMENT_STRATEGY in
+          add)
+            echo "Executing Add deployment playbook"
+            ;;
+          rollback)
+            echo "Executing Rollback deployment playbook"
+            ;;
+          start)
+            echo "Executing Start deployment playbook"
+            ;;
+          gracefulrestart)
+            echo "Executing Graceful Restart deployment playbook"
+            ;;
+          restart)
+            echo "Executing Restart deployment playbook"
+            ;;
+          stop)
+            echo "Executing Stop deployment playbook"
+            ;;
+          *)
+            echo "Unknown deployment strategy: $DEPLOYMENT_STRATEGY"
+            exit 1
+            ;;
+        esac
