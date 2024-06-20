@@ -1,5 +1,5 @@
 # Use an official Maven image as a parent image
-FROM maven:3.8.4-openjdk-17-slim AS build
+FROM public.ecr.aws/docker/library/maven:3.8.4-openjdk-17-slim AS build
 
 # Set the working directory in the container
 WORKDIR /app
