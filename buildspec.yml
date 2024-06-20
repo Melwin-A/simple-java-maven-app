@@ -5,7 +5,7 @@ env:
     REPOSITORY_URI: "074806522502.dkr.ecr.us-east-1.amazonaws.com/sampleapp-registory"
     IMAGE_TAG: latest
     AWS_DEFAULT_REGION: us-east-1
-	DEPLOYMENT_STRATEGY: "add"
+    DEPLOYMENT_STRATEGY: "add"
 phases:
   pre_build:
     commands:
