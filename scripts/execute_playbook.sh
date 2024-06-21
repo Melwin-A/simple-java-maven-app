@@ -4,27 +4,27 @@
 deployment_strategy=$1
 
 # Map the deployment strategy to the corresponding playbook
-case $deployment_strategy in
-  "add")
-    playbook="add.yml"
-    ;;
-  "rollback")
-    playbook="rollback.yml"
-    ;;
-  "start")
-    playbook="start.yml"
-    ;;
-  "gracefulrestart")
-    playbook="gracefulrestart.yml"
-    ;;
-  "restart")
-    playbook="restart.yml"
-    ;;
-  "stop")
-    playbook="stop.yml"
-    ;;
-  *)
-    echo "Unknown deployment strategy: $deployment_strategy"
-    exit 1
-    ;;
-esac
+case $DEPLOYMENT_STRATEGY in
+      add)
+        echo "Executing Add deployment playbook"
+        ;;
+      rollback)
+        echo "Executing Rollback deployment playbook"
+        ;;
+      start)
+        echo "Executing Start deployment playbook"
+        ;;
+      gracefulrestart)
+        echo "Executing Graceful Restart deployment playbook"
+        ;;
+      restart)
+        echo "Executing Restart deployment playbook"
+        ;;
+      stop)
+        echo "Executing Stop deployment playbook"
+        ;;
+      *)
+        echo "Unknown deployment strategy: $DEPLOYMENT_STRATEGY"
+        exit 1
+        ;;
+  esac
