@@ -1,12 +1,16 @@
 version: 0.0
-Resources:
-  - myfunction:
-      Type: AWS::Lambda::Function
-      Properties:
-        Name: myfunction
-        Alias: live
-Hooks:
-  ApplicationStart:
-    - location: invoke_lambda.sh
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/deployment
+
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
       timeout: 300
-      runas: root
+      runas: ec2-user
+
+  AfterInstall:
+    - location: scripts/execute_playbook.sh
+      timeout: 300
+      runas: ec2-user
