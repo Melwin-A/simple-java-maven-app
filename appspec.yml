@@ -1,8 +1,14 @@
-version: 0.0
-Resources:
-  - myLambda:
-      Type: AWS::Lambda::Function
-      Properties:
-        Name: myLambda
-        Alias: live
-        TargetVersion: 1
+---
+version: 0
+files:
+  - source: /
+    destination: /home/ec2-user/deployment
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/execute_playbook.sh
+      timeout: 300
+      runas: ec2-user
