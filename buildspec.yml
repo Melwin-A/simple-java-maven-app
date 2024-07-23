@@ -11,6 +11,9 @@ phases:
     commands:
       - echo create Amazon ECR regirstry
       - aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
+      - cd scripts/
+      - mkdir newfolder
+      - git clone -b dev https://github.com/Melwin-A/simple-java-maven-app.git
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
   build:
