@@ -10,7 +10,11 @@ phases:
   pre_build:
     commands:
       - echo create Amazon ECR regirstry
-      - aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
+      - |
+        if ! aws ecr describe-repositories --repository-names "sampleapp-registory" --region $AWS_DEFAULT_REGION; then
+          aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
+        fi
+      #- aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
   build:
