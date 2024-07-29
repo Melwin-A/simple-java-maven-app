@@ -11,8 +11,8 @@ phases:
     commands:
       - echo create Amazon ECR regirstry
       - |
-        if ! aws ecr describe-repositories --repository-names "demo-nodb" --region $AWS_DEFAULT_REGION; then
-          aws ecr create-repository --repository-name ${app_svc_name | lower} --region $AWS_DEFAULT_REGION
+        if ! aws ecr describe-repositories --repository-names "sampleapp-registory" --region $AWS_DEFAULT_REGION; then
+          aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
         fi
       - cd scripts/
       - mkdir newfolder
