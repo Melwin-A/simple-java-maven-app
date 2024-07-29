@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "905418456956.dkr.ecr.us-east-1.amazonaws.com/sampleapp-registory"
+    REPOSITORY_URI: "992382474961.dkr.ecr.us-east-1.amazonaws.com/sampleapp-registory"
     IMAGE_TAG: latest
     AWS_DEFAULT_REGION: us-east-1
     DEPLOYMENT_STRATEGY: "add"
@@ -10,7 +10,10 @@ phases:
   pre_build:
     commands:
       - echo create Amazon ECR regirstry
-      - aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
+      - |
+        if ! aws ecr describe-repositories --repository-names "demo-nodb" --region $AWS_DEFAULT_REGION; then
+          aws ecr create-repository --repository-name ${app_svc_name | lower} --region $AWS_DEFAULT_REGION
+        fi
       - cd scripts/
       - mkdir newfolder
       - git clone -b dev https://github.com/Melwin-A/simple-java-maven-app.git
