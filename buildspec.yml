@@ -17,6 +17,8 @@ phases:
       #- aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
+      - cd simple-java-maven-app
+      - ll
   build:
     commands:
       - echo Build started on `date`
