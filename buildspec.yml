@@ -17,7 +17,7 @@ phases:
       #- aws ecr create-repository --repository-name sampleapp-registory --region $AWS_DEFAULT_REGION
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
-      - echo "Primary Source Artifact Directory: $CODEBUILD_SRC_DIR_PRIMARY"
+      - echo "primary source artifact- $CODEBUILD_SRC_DIR_PRIMARY"
       - ls -la $CODEBUILD_SRC_DIR_PRIMARY
   build:
     commands:
